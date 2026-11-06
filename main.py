@@ -14,7 +14,7 @@ def find_task(task_id: int, db: Session):
     task = db.query(Task).filter(Task.id == task_id).first()
     
     if task is None:
-        HTTPException(
+        raise HTTPException(
             status_code=404,
             detail='Task not found.'
         )
@@ -42,12 +42,9 @@ def create_task(data_task: TaskCreate, db: Session = Depends(get_db)):
     return task
 
 @app.get('/tasks/{task_id}')
-def create_task(task_id: int, db: Session = Depends(get_db)):
-    task = db.query(Task).filter(Task.id == task_id).first() 
-    
-    if task is None: 
-        return {'message':'Task not found.'}
-    
+def get_task(task_id: int, db: Session = Depends(get_db)):
+    task = find_task(task_id, db)
+
     return task
 
 @app.put('/tasks/{task_id}')
