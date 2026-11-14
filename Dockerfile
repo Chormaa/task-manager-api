@@ -4,7 +4,7 @@ FROM python:3.14-slim
 # where i will work inside my container
 WORKDIR /app
 
-# which files do i need to copy
+# which files do i need to copy (dependencies)
 COPY requirements.txt .
 
 # what should i install or execute during construction
@@ -15,4 +15,3 @@ COPY . .
 
 # what should be executed when the container starts
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-
