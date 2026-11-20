@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from database import get_db, engine
 from models import Task, Base
 
-Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(Task)
 
 app = FastAPI()
 
